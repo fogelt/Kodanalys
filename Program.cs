@@ -5,8 +5,8 @@ namespace Kodanalys
 {
     class Program
     {
-        readonly static string[] UserList = new string[10];
-        static int UserCount = 0;
+        readonly static List<string> Users = new List<string>();
+
         static void Main(string[] args)
         {
             Console.Clear();
@@ -20,23 +20,22 @@ namespace Kodanalys
                 switch (choice)
                 {
                     case MenuChoice.AddUser:
-                        UserMethods.AddUser(UserList, ref UserCount);
+                        UserMethods.AddUser(Users);
                         break;
                     case MenuChoice.ShowAllUsers:
-                        UserMethods.ShowAllUsers(UserList, UserCount);
+                        UserMethods.ShowAllUsers(Users);
                         break;
                     case MenuChoice.RemoveUser:
-                        UserMethods.RemoveUser(UserList, ref UserCount);
+                        UserMethods.RemoveUser(Users);
                         break;
                     case MenuChoice.SearchForUser:
-                        UserMethods.SearchForUser(UserList, UserCount);
+                        UserMethods.SearchForUser(Users);
                         break;
                     case MenuChoice.Exit:
                         return;
                     case MenuChoice.Invalid:
                         break;
                 }
-
             }
         }
 
@@ -49,6 +48,7 @@ namespace Kodanalys
             Console.WriteLine("4. Sök användare");
             Console.WriteLine("5. Avsluta");
         }
+
         private static MenuChoice GetMenuChoice()
         {
             string? input = Console.ReadLine();

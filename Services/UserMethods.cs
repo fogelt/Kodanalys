@@ -1,79 +1,78 @@
+using System;
+using System.Collections.Generic;
+
 namespace Kodanalys.Services
 {
     public class UserMethods
     {
-        public static void AddUser(string[] userList, ref int userCount)
+        public static void AddUser(List<string> users)
         {
             Console.Write("Ange namn: ");
             string user = Console.ReadLine()!;
-            if (userCount < userList.Length)
+
+            if (!string.IsNullOrWhiteSpace(user))
             {
-                userList[userCount] = user;
-                userCount++;
+                users.Add(user);
                 Console.WriteLine($"Lade till ny användare: {user}");
             }
             else
             {
-                Console.WriteLine("Listan är full!");
+                Console.WriteLine("Ogiltigt namn.");
             }
+
             WaitForKeyPress();
         }
 
-        public static void ShowAllUsers(string[] userList, int userCount)
+        public static void ShowAllUsers(List<string> users)
         {
-            Console.WriteLine("Användare:");
-            for (int i = 0; i < userCount; i++)
+            if (users.Count == 0)
             {
-                Console.WriteLine(userList[i]);
+                Console.WriteLine("Inga användare i listan.");
             }
+            else
+            {
+                Console.WriteLine("Användare:");
+                foreach (var user in users)
+                {
+                    Console.WriteLine(user);
+                }
+            }
+
             WaitForKeyPress();
         }
 
-        public static void RemoveUser(string[] userList, ref int userCount)
+        public static void RemoveUser(List<string> users)
         {
             Console.Write("Ange namn att ta bort: ");
-            string userInput = Console.ReadLine()!;
-            int index = FindUserIndex(userList, userCount, userInput);
+            string input = Console.ReadLine()!;
 
-            if (index != -1)
+            if (users.Remove(input))
             {
-                string removedUser = userList[index];
-                for (int i = index; i < userCount - 1; i++)
-                {
-                    userList[i] = userList[i + 1];
-                }
-                userCount--;
-                Console.WriteLine($"Tog bort {removedUser} från användarlistan.");
+                Console.WriteLine($"Tog bort {input} från användarlistan.");
             }
             else
             {
                 Console.WriteLine("Användaren hittades inte.");
             }
+
             WaitForKeyPress();
         }
 
-        public static void SearchForUser(string[] userList, int userCount)
+        public static void SearchForUser(List<string> users)
         {
             Console.Write("Ange namn att söka: ");
-            string userInput = Console.ReadLine()!;
-            int index = FindUserIndex(userList, userCount, userInput);
+            string input = Console.ReadLine()!;
 
-            if (index != -1)
+            if (users.Contains(input))
+            {
                 Console.WriteLine("Användaren finns i listan.");
+            }
             else
+            {
                 Console.WriteLine("Användaren hittades inte.");
+            }
 
             WaitForKeyPress();
-        }
-
-        private static int FindUserIndex(string[] userList, int userCount, string userInput)
-        {
-            for (int i = 0; i < userCount; i++)
-            {
-                if (userList[i] == userInput)
-                    return i;
-            }
-            return -1;
         }
 
         private static void WaitForKeyPress()
