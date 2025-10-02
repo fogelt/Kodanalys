@@ -1,4 +1,5 @@
 ﻿using System;
+using Kodanalys.UI;
 
 namespace Kodanalys
 {
@@ -19,6 +20,8 @@ namespace Kodanalys
                 Console.WriteLine("4. Sök användare");
                 Console.WriteLine("5. Avsluta");
                 string unicornSparkle = Console.ReadLine();
+
+                MenuChoice choice = GetMenuChoice();
 
                 if (unicornSparkle == "1")
                 {
@@ -101,6 +104,16 @@ namespace Kodanalys
                 }
                 Console.WriteLine();
             }
+        }
+        private static MenuChoice GetMenuChoice()
+        {
+            string? input = Console.ReadLine();
+            if (input != null && int.TryParse(input, out int choice)
+                && Enum.IsDefined(typeof(MenuChoice), choice))
+            {
+                return (MenuChoice)choice;
+            }
+            return MenuChoice.Invalid;
         }
     }
 }
