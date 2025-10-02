@@ -1,27 +1,21 @@
-﻿using System;
-using Kodanalys.UI;
+﻿using Kodanalys.UI;
 using Kodanalys.Services;
-using Kodanalys.Models;
 
 namespace Kodanalys
 {
     class Program
     {
-        static string[] UserList = new string[10];
+        readonly static string[] UserList = new string[10];
         static int UserCount = 0;
         static void Main(string[] args)
         {
-            bool Running = true;
-            while (Running)
-            {
-                Console.WriteLine("Välj ett alternativ:");
-                Console.WriteLine("1. Lägg till användare");
-                Console.WriteLine("2. Visa alla användare");
-                Console.WriteLine("3. Ta bort användare");
-                Console.WriteLine("4. Sök användare");
-                Console.WriteLine("5. Avsluta");
+            Console.Clear();
 
+            while (true)
+            {
+                PrintMenu();
                 MenuChoice choice = GetMenuChoice();
+                Console.Clear();
 
                 switch (choice)
                 {
@@ -29,22 +23,31 @@ namespace Kodanalys
                         UserMethods.AddUser(UserList, ref UserCount);
                         break;
                     case MenuChoice.ShowAllUsers:
-                        UserMethods.ShowAllUsers(UserList, ref UserCount);
+                        UserMethods.ShowAllUsers(UserList, UserCount);
                         break;
                     case MenuChoice.RemoveUser:
                         UserMethods.RemoveUser(UserList, ref UserCount);
                         break;
                     case MenuChoice.SearchForUser:
-                        UserMethods.SearchForUser(UserList, ref UserCount);
+                        UserMethods.SearchForUser(UserList, UserCount);
                         break;
+                    case MenuChoice.Exit:
+                        return;
                     case MenuChoice.Invalid:
-                        Running = false;
-                        break;
-                    default:
                         break;
                 }
 
             }
+        }
+
+        private static void PrintMenu()
+        {
+            Console.WriteLine("Välj ett alternativ:");
+            Console.WriteLine("1. Lägg till användare");
+            Console.WriteLine("2. Visa alla användare");
+            Console.WriteLine("3. Ta bort användare");
+            Console.WriteLine("4. Sök användare");
+            Console.WriteLine("5. Avsluta");
         }
         private static MenuChoice GetMenuChoice()
         {

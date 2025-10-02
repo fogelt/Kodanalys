@@ -7,7 +7,8 @@ namespace Kodanalys.UI
         AddUser = 1,
         ShowAllUsers = 2,
         RemoveUser = 3,
-        SearchForUser = 4
+        SearchForUser = 4,
+        Exit = 5
 
     }
 }
