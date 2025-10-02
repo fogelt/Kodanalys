@@ -7,10 +7,12 @@ namespace Kodanalys
 {
     class Program
     {
+        static string[] UserList = new string[10];
+        static int UserCount = 0;
         static void Main(string[] args)
         {
-            bool programHalted = true;
-            while (programHalted)
+            bool Running = true;
+            while (Running)
             {
                 Console.WriteLine("Välj ett alternativ:");
                 Console.WriteLine("1. Lägg till användare");
@@ -24,18 +26,19 @@ namespace Kodanalys
                 switch (choice)
                 {
                     case MenuChoice.AddUser:
-                        UserMethods.AddUser();
+                        UserMethods.AddUser(UserList, ref UserCount);
                         break;
                     case MenuChoice.ShowAllUsers:
-                        UserMethods.ShowAllUsers();
+                        UserMethods.ShowAllUsers(UserList, ref UserCount);
                         break;
-                    case MenuChoice.RemoveUser
-                        UserMethods.RemoveUser();
+                    case MenuChoice.RemoveUser:
+                        UserMethods.RemoveUser(UserList, ref UserCount);
                         break;
-                    case MenuChoice.SearchForUser
-                        UserMethods.SearchForUser();
+                    case MenuChoice.SearchForUser:
+                        UserMethods.SearchForUser(UserList, ref UserCount);
                         break;
                     case MenuChoice.Invalid:
+                        Running = false;
                         break;
                     default:
                         break;
