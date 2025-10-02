@@ -1,36 +1,35 @@
-# Kodanalys och förbättring
+# Kodanalys och Refaktorering
 
-## ?? Syfte
-Syftet med denna uppgift är att träna på att analysera befintlig kod, identifiera brister och förbättringsmöjligheter samt reflektera över hur förbättringarna påverkar kodens kvalitet, läsbarhet och underhållbarhet.
+## Syfte
+Syftet var att analysera befintlig C#-kod, identifiera brister och fÃ¶rbÃ¤ttra lÃ¤sbarhet, underhÃ¥llbarhet och struktur.
 
-För VG ska studenten visa förmåga att självständigt analysera och utvärdera programmet samt motivera och genomföra förbättringar.
+## Identifierade problem
+1. **DÃ¥liga namn**  
+   Exempel: `celestialWhispers`, `magicConstant`. SvÃ¥rt att fÃ¶rstÃ¥ syftet.  
 
-## ?? Uppgift
-Du får en färdig C#-applikation (console-app) som innehåller flera medvetna brister:
-- Dåliga namn på variabler och metoder
-- Duplicerad kod
-- Bristande användning av samlingsklasser
-- Onödigt komplicerade if/else-satser
-- Inkonsekvent kodstil
+2. **Duplicerad kod**  
+   Samma sÃ¶klogik fanns i flera metoder â†’ brÃ¶t mot DRY-principen.  
 
-### Din uppgift
-1.  **Analysera koden**
-    - Beskriv de största problemen du identifierar (minst 3).
-    - Förklara varför dessa är problem, kopplat till principer för god kodkvalitet (ex. läsbarhet, DRY, enkelhet, underhållbarhet).
-2.  **Föreslå förbättringar**
-    - Ge konkreta förslag på hur koden kan förbättras.
-    - Motivera varför dina förslag gör koden bättre.
-3.  **Genomför förbättringarna**
-    - Refaktorera koden i Visual Studio.
-    - Använd Git för versionshantering och gör minst 3 separata commits där du beskriver vad som förbättras i varje steg.
-4.  **Reflektera**
-    - Skriv en kort text (1 A4- sida) där du sammanfattar vad du har lärt dig.
-    - Förklara hur dina förbättringar bidrar till att koden blir tydligare och mer lättunderhållen.
+3. **OnÃ¶digt komplicerade if/else-satser**  
+   LÃ¥nga kedjor fÃ¶r menyval gjorde koden svÃ¥r att bygga ut.  
 
-## ? Bedömning
-- **Godkänt (G):** Studenten identifierar problem i koden, föreslår och genomför rimliga förbättringar, samt använder Git korrekt för att dokumentera sitt arbete.
-- **Väl godkänt (VG):** Studenten analyserar koden på djupet, identifierar både syntaktiska och strukturella problem, motiverar förbättringarna väl och visar förmåga att reflektera över hur ändringarna påverkar långsiktig kodkvalitet.
+4. **Manuell array-hantering**  
+   AnvÃ¤ndare sparades i `string[]` + separat rÃ¤knare â†’ risk fÃ¶r buggar.
 
-## ?? Inlämning
-- Länk till ditt GitHub-repo med den refaktorerade koden (med commits).
-- En kort skriftlig rapport (PDF eller README i repot) med analys, förbättringsförslag och reflektion.
+6. **Inkonsekvent stil**  
+   Blandade sprÃ¥k och felaktig namngivning (`class program` i stÃ¤llet fÃ¶r `Program`).  
+
+## FÃ¶rbÃ¤ttringar
+- **Tydliga namn**: `UserList`, `UserCount` â†’ Ã¶kad lÃ¤sbarhet.  
+- **Extraherad sÃ¶kmetod**: `FindUserIndex()` â†’ minskad duplicering.  
+- **Switch + enum**: ersatte if/else-kedjor â†’ mer strukturerad kod.  
+- **List<string>**: ersatte array + rÃ¤knare â†’ enklare och robustare.  
+- **Enhetlig kodstil**: PascalCase fÃ¶r klasser och metoder, konsekvent sprÃ¥k.  
+
+## Reflektion
+Refaktoreringen gjorde programmet mer robust, tydligt och lÃ¤tt att bygga ut.  
+Jag har lÃ¤rt mig vikten av:  
+- God namngivning  
+- DRY-principen  
+- Att anvÃ¤nda rÃ¤tt datastrukturer  
+- Konsekvent kodstil  
